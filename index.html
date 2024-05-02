@@ -1,0 +1,139 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            color: rgb(49, 49, 49);
+            font-size: x-large;
+        }
+
+        pre {
+            margin-left: 20px;
+            font-size: large;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+        }
+        ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border:#979595;
+}
+
+li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #979595;
+}
+
+.active {
+  background-color: #9fa1a0;
+}
+
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a class="active" href="index.html">Exp1</a></li>
+        <li><a href="exp2.html">Exp2</a></li>
+        <li><a href="exp3.html">Exp3</a></li>
+        <li ><a href="exp4.html">Exp4</a></li>
+        <li><a href="exp5.html">Exp5</a></li>
+        <li><a href="exp6.html">Exp6</a></li>
+        <li><a href="exp7.html">Exp7</a></li>
+        <li ><a href="exp8.html">Exp8</a></li>
+        <li><a href="exp9.html">Exp9</a></li>
+        <li><a href="exp10.html">Exp10</a></li>
+        <li><a href="exp11.html">Exp11</a></li>
+        <li ><a href="exp12.html">Exp12</a></li>
+        <li><a href="exp13.html">Exp13</a></li>
+        
+      </ul>
+    <hr>
+    <div class=row>
+        <div class="col-1">
+           <img src="exp1.png" alt="">
+            <pre>
+                 <h1>Create table with integrity constraints</h1>
+                CREATE TABLE Book (
+                    ISBN varchar(40) NULL,
+                    Book_Title varchar(30) NOT NULL,
+                    Book_Code varchar(30) PRIMARY KEY,
+                    Book_Price numeric(8, 2) NOT NULL CHECK (Book_Price >= 0),
+                    Author_ID char(1) NOT NULL,
+                    Paperback char(1) DEFAULT 'Y' CHECK (Paperback IN ('Y', 'N'))
+                );
+                
+                 <h1>Add a column Book_type in the Book table</h1>
+                ALTER TABLE Book
+                ADD Book_Type varchar(20);
+                
+                 <h1>Modify the data type of Author_ID to varchar</h1>
+                ALTER TABLE Book
+                ALTER COLUMN Author_ID varchar(10);
+                
+                 <h1>Insert five tuples in the table</h1>
+                INSERT INTO Book (ISBN, Book_Title, Book_Code, Book_Price, Author_ID, Paperback, Book_Type)
+                VALUES 
+                ('ISBN001', 'Advanced DBMS', 'ADVDBMS01', 100.00, 'AUTH_7', 'N', 'Computer Science'),
+                ('ISBN002', 'Data Structures', 'DATSTRUC02', 80.00, 'AUTH_5', 'Y', 'Computer Science'),
+                ('ISBN003', 'Physics Basics', 'PHYBAS01', 75.00, 'AUTH_3', 'Y', 'Science'),
+                ('ISBN004', 'Chemistry Essentials', 'CHEM01', 90.00, 'AUTH_4', 'Y', 'Science'),
+                ('ISBN005', 'Mathematics for Beginners', 'MATH01', 60.00, 'AUTH_2', 'N', 'Mathematics');
+                
+                 <h1>Provide 10% discount on the cost of “Advanced DBMS” book</h1>
+                UPDATE Book
+                SET Book_Price = Book_Price * 0.9
+                WHERE Book_Title = 'Advanced DBMS';
+                
+                 <h1>Find all the books written by author whose Id is AUTH_7</h1>
+                SELECT * FROM Book
+                WHERE Author_ID = 'AUTH_7';
+                
+                 <h1>List all the book titles with their author IDs</h1>
+                SELECT Book_Title, Author_ID FROM Book;
+                
+                 <h1>Find the title of the most expensive book of type “Science” written by any author</h1>
+                SELECT Book_Title
+                FROM Book
+                WHERE Book_Type = 'Science'
+                ORDER BY Book_Price DESC
+                LIMIT 1;
+                
+                
+            </pre>
+        </div>
+        <div class="col-2">
+            <pre>
+               
+            </pre>
+        </div>
+
+    </div>
+    <hr>
+</body>
+
+</html>

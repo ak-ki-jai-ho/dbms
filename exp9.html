@@ -1,0 +1,183 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         h1 {
+            color: rgb(49, 49, 49);
+            font-size: x-large;
+        }
+
+        pre {
+            margin-left: 20px;
+            font-size: large;
+        }
+        .row {
+            display: flex;
+            flex-direction: row;
+        }
+        ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border:#979595;
+}
+
+li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #979595;
+}
+
+.active {
+  background-color: #9fa1a0;
+}
+
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a href="index.html">Exp1</a></li>
+        <li><a href="exp2.html">Exp2</a></li>
+        <li><a href="exp3.html">Exp3</a></li>
+        <li><a href="exp4.html">Exp4</a></li>
+        <li><a href="exp5.html">Exp5</a></li>
+        <li><a href="exp6.html">Exp6</a></li>
+        <li><a href="exp7.html">Exp7</a></li>
+        <li><a href="exp8.html">Exp8</a></li>
+        <li><a class="active" href="exp9.html">Exp9</a></li>
+        <li><a href="exp10.html">Exp10</a></li>
+        <li><a href="exp11.html">Exp11</a></li>
+        <li><a href="exp12.html">Exp12</a></li>
+        <li><a href="exp13.html">Exp13</a></li>
+        
+      </ul>
+    <hr>
+    
+    <div class=row>
+        <div class="col-1">
+            <pre>
+ <h1>Create tables</h1>
+CREATE TABLE Book (
+    ISBN varchar(40) PRIMARY KEY,
+    Bk_Title varchar(100),
+    Author_ID varchar(10),
+    Bk_type varchar(20),
+    Price numeric(8, 2)
+);
+
+CREATE TABLE Author (
+    Author_ID varchar(10) PRIMARY KEY,
+    Author_fname varchar(50),
+    Author_lname varchar(50),
+    city varchar(50),
+    Contact_No varchar(15),
+    Salary numeric(10, 2)
+);
+
+ <h1>Add a column salary in the author table</h1>
+ALTER TABLE Author
+ADD COLUMN Salary numeric(10, 2);
+
+ <h1>Insert five tuples in each table</h1>
+INSERT INTO Book (ISBN, Bk_Title, Author_ID, Bk_type, Price)
+VALUES 
+('ISBN001', 'Database Systems', 'AUTH_1', 'Technical', 50.00),
+('ISBN002', 'Introduction to Algorithms', 'AUTH_2', 'Technical', 60.00),
+('ISBN003', 'The Art of Computer Programming', 'AUTH_3', 'Technical', 70.00),
+('ISBN004', 'Data Structures and Algorithm Analysis', 'AUTH_4', 'Technical', 55.00),
+('ISBN005', 'Operating System Concepts', 'AUTH_5', 'Technical', 65.00);
+
+INSERT INTO Author (Author_ID, Author_fname, Author_lname, city, Contact_No, Salary)
+VALUES 
+('AUTH_1', 'Abraham', 'Silberschatz', 'New York', '+1234567890', 70000.00),
+('AUTH_2', 'Thomas', 'Cormen', 'Boston', '+1987654321', 75000.00),
+('AUTH_3', 'Donald', 'Knuth', 'Stanford', '+9123456789', 80000.00),
+('AUTH_4', 'Mark', 'Allen Weiss', 'California', '+9198765432', 72000.00),
+('AUTH_5', 'Andrew', 'Tanenbaum', 'Amsterdam', '+9178901234', 68000.00);
+
+ <h1>Update the city of the author whose last name is “Korth”</h1>
+UPDATE Author
+SET city = 'Chicago'
+WHERE Author_lname = 'Korth';
+
+ <h1>List all details of books with author ID and author name</h1>
+SELECT b.ISBN, b.Bk_Title, b.Author_ID, CONCAT(a.Author_fname, ' ', a.Author_lname) AS Author_Name
+FROM Book b
+INNER JOIN Author a ON b.Author_ID = a.Author_ID;
+
+ <h1>Create a view for the requirement mentioned</h1>
+CREATE VIEW Author_City_Update AS
+SELECT *
+FROM Author
+WHERE Author_lname = 'Korth';
+
+ <h1>Create a procedure to display the number of books, most expensive and least expensive as per type of book</h1>
+DELIMITER //
+
+CREATE PROCEDURE BookStats()
+BEGIN
+    DECLARE book_count INT;
+    DECLARE most_expensive DECIMAL(8, 2);
+    DECLARE least_expensive DECIMAL(8, 2);
+    DECLARE bk_type VARCHAR(20);
+    
+    DECLARE cur CURSOR FOR
+        SELECT DISTINCT Bk_type FROM Book;
+    
+    OPEN cur;
+    
+    book_loop: LOOP
+        FETCH cur INTO bk_type;
+        IF bk_type IS NULL THEN
+            LEAVE book_loop;
+        END IF;
+        
+        SELECT COUNT(*), MAX(Price), MIN(Price) INTO book_count, most_expensive, least_expensive
+        FROM Book WHERE Bk_type = bk_type;
+        
+        SELECT CONCAT('Type:', bk_type, ', Count:', book_count, ', Most Expensive:', most_expensive, ', Least Expensive:', least_expensive);
+    END LOOP;
+    
+    CLOSE cur;
+END //
+
+DELIMITER ;
+
+ <h1>Call the procedure to display book statistics</h1>
+CALL BookStats();
+
+              
+            </pre>
+        </div>
+        <div class="col-2">
+            <pre>
+                
+
+            </pre>
+        </div>
+
+    </div>
+    <hr>
+</body>
+
+</html>

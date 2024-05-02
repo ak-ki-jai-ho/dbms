@@ -1,0 +1,130 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         h1 {
+            color: rgb(49, 49, 49);
+            font-size: x-large;
+        }
+
+        pre {
+            margin-left: 20px;
+            font-size: large;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+        }
+        ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border:#979595;
+}
+
+li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #979595;
+}
+
+.active {
+  background-color: #9fa1a0;
+}
+
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a href="index.html">Exp1</a></li>
+        <li><a href="exp2.html">Exp2</a></li>
+        <li><a href="exp3.html">Exp3</a></li>
+        <li><a href="exp4.html">Exp4</a></li>
+        <li><a href="exp5.html">Exp5</a></li>
+        <li><a class="active"  href="exp6.html">Exp6</a></li>
+        <li><a href="exp7.html">Exp7</a></li>
+        <li><a href="exp8.html">Exp8</a></li>
+        <li><a href="exp9.html">Exp9</a></li>
+        <li><a href="exp10.html">Exp10</a></li>
+        <li><a href="exp11.html">Exp11</a></li>
+        <li><a href="exp12.html">Exp12</a></li>
+        <li><a href="exp13.html">Exp13</a></li>
+        
+      </ul>
+    <hr>
+<img src="exp6.png" alt="">
+    <div class=row>
+        <div class="col-1">
+            <pre>
+ <h1>Create the table</h1>
+CREATE TABLE Products (
+    prod_id int PRIMARY KEY,
+    prod_name varchar(50),
+    prod_cost numeric(10, 2),
+    prod_price numeric(10, 2)
+);
+
+ <h1>Insert two more tuples</h1>
+INSERT INTO Products (prod_id, prod_name, prod_cost, prod_price)
+VALUES 
+(14, 'Washing Machine', 18000, 22000),
+(15, 'Refrigerator', 25000, 30000);
+
+ <h1>Display products in descending order of prod_price</h1>
+SELECT * FROM Products
+ORDER BY prod_price DESC;
+
+ <h1>Update the name of the prod_name Printer to Upper Case</h1>
+UPDATE Products
+SET prod_name = UPPER(prod_name)
+WHERE prod_name = 'Printer';
+
+ <h1>Create a view for the requirement mentioned</h1>
+CREATE VIEW Product_View AS
+SELECT * FROM Products;
+
+ <h1>Create a function to calculate the profit of products</h1>
+CREATE FUNCTION CalculateProfit(cost numeric, price numeric) RETURNS numeric
+BEGIN
+    DECLARE profit numeric;
+    SET profit = price - cost;
+    RETURN profit;
+END;
+
+ <h1>Display the profit calculated</h1>
+SELECT prod_name, CalculateProfit(prod_cost, prod_price) AS Profit FROM Products;
+                
+            </pre>
+        </div>
+        <div class="col-2">
+            <pre>
+                
+            </pre>
+        </div>
+
+    </div>
+    <hr>
+</body>
+
+</html>

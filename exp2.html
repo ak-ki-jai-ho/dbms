@@ -1,0 +1,161 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         h1 {
+            color: rgb(49, 49, 49);
+            font-size: x-large;
+        }
+
+        pre {
+            margin-left: 20px;
+            font-size: large;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+        }
+        ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border:#979595;
+}
+
+li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #979595;
+}
+
+.active {
+  background-color: #9fa1a0;
+}
+
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a href="index.html">Exp1</a></li>
+        <li><a class="active" href="exp2.html">Exp2</a></li>
+        <li><a href="exp3.html">Exp3</a></li>
+        <li ><a href="exp4.html">Exp4</a></li>
+        <li><a href="exp5.html">Exp5</a></li>
+        <li><a href="exp6.html">Exp6</a></li>
+        <li><a href="exp7.html">Exp7</a></li>
+        <li ><a href="exp8.html">Exp8</a></li>
+        <li><a href="exp9.html">Exp9</a></li>
+        <li><a href="exp10.html">Exp10</a></li>
+        <li><a href="exp11.html">Exp11</a></li>
+        <li ><a href="exp12.html">Exp12</a></li>
+        <li><a href="exp13.html">Exp13</a></li>
+        
+      </ul>
+    <hr>
+    
+    <div class=row>
+        <div class="col-1">
+            
+            <pre>
+                <h1>Create tables</h1>
+CREATE TABLE Book (
+    ISBN varchar(40),
+    Bk_Title varchar(100),
+    Author_ID int,
+    Bk_Type varchar(50),
+    Price numeric(8, 2)
+);
+
+CREATE TABLE Author (
+    Author_ID int PRIMARY KEY,
+    Author_fname varchar(50),
+    Author_lname varchar(50),
+    City varchar(50),
+    Contact_No varchar(15)
+);
+
+ <h1>Insert five tuples in each table</h1>
+INSERT INTO Book (ISBN, Bk_Title, Author_ID, Bk_Type, Price)
+VALUES 
+('ISBN001', 'Introduction to Algorithms', 101, 'Computer Science', 50.00),
+('ISBN002', 'Database Systems', 102, 'Computer Science', 60.00),
+('ISBN003', 'Physics for Scientists and Engineers', 103, 'Science', 40.00),
+('ISBN004', 'Chemistry: The Central Science', 104, 'Science', 45.00),
+('ISBN005', 'Mathematics for Machine Learning', 105, 'Mathematics', 55.00);
+
+INSERT INTO Author (Author_ID, Author_fname, Author_lname, City, Contact_No)
+VALUES 
+(101, 'Thomas', 'Cormen', 'New York', '+1234567890'),
+(102, 'Abraham', 'Silberschatz', 'Boston', '+1987654321'),
+(103, 'Paul', 'Tipler', 'Thane', '+9123456789'),
+(104, 'Theodore', 'Brown', 'Mumbai', '+9198765432'),
+(105, 'Michael', 'Littman', 'Thane', '+9178901234');
+
+ <h1>Update the city of the author whose last name is “Patil”</h1>
+UPDATE Author
+SET City = 'Pune'
+WHERE Author_lname = 'Patil';
+
+ <h1>Rename the Book table to Book_details and describe the table</h1>
+ALTER TABLE Book RENAME TO Book_details;
+DESCRIBE Book_details;
+
+ <h1>Find all the books written by author whose Id is 129</h1>
+SELECT * FROM Book_details
+WHERE Author_ID = 129;
+
+ <h1>Find the title of the most expensive book of type “Science” written by author “Elmasri”</h1>
+SELECT Bk_Title
+FROM Book_details
+WHERE Bk_Type = 'Science' AND Author_ID = (
+    SELECT Author_ID FROM Author WHERE Author_lname = 'Elmasri'
+)
+ORDER BY Price DESC
+LIMIT 1;
+
+ <h1>Find the number of authors from ‘Thane’ city</h1>
+SELECT COUNT(*) AS Num_Authors_Thane FROM Author WHERE City = 'Thane';
+
+ <h1>Demonstrate the ROLLBACK and COMMIT command in a transaction</h1>
+START TRANSACTION;
+
+ Perform some operations here
+
+ ROLLBACK; Uncomment to rollback changes
+ COMMIT; Uncomment to commit changes
+
+            </pre>
+        </div>
+        <div class="col-2">
+            <pre>
+              
+
+            </pre>
+        </div>
+
+    </div>
+    <hr>
+</body>
+
+</html>

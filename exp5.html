@@ -1,0 +1,160 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         h1 {
+            color: rgb(49, 49, 49);
+            font-size: x-large;
+        }
+
+        pre {
+            margin-left: 20px;
+            font-size: large;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+        }
+        ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border:#979595;
+}
+
+li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #979595;
+}
+
+.active {
+  background-color: #9fa1a0;
+}
+
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a href="index.html">Exp1</a></li>
+        <li><a href="exp2.html">Exp2</a></li>
+        <li><a href="exp3.html">Exp3</a></li>
+        <li><a href="exp4.html">Exp4</a></li>
+        <li><a class="active" href="exp5.html">Exp5</a></li>
+        <li><a href="exp6.html">Exp6</a></li>
+        <li><a href="exp7.html">Exp7</a></li>
+        <li><a href="exp8.html">Exp8</a></li>
+        <li><a href="exp9.html">Exp9</a></li>
+        <li><a href="exp10.html">Exp10</a></li>
+        <li><a href="exp11.html">Exp11</a></li>
+        <li><a href="exp12.html">Exp12</a></li>
+        <li><a href="exp13.html">Exp13</a></li>
+        
+      </ul>
+    <hr>
+    <div class=row>
+        <div class="col-1">
+            <pre>
+                 <h1>Create tables</h1>
+CREATE TABLE Director (
+    Dir_id int PRIMARY KEY,
+    Dir_FName varchar(50),
+    Dir_LName varchar(50),
+    Dir_city varchar(100),
+    Dir_Phone varchar(15)
+);
+
+CREATE TABLE Movies (
+    Mov_id int PRIMARY KEY,
+    Mov_Title varchar(100),
+    Mov_year int,
+    Mov_Lang varchar(50),
+    Dir_id int,
+    FOREIGN KEY (Dir_id) REFERENCES Director(Dir_id)
+);
+
+ <h1>Insert five tuples in each table</h1>
+INSERT INTO Director (Dir_id, Dir_FName, Dir_LName, Dir_city, Dir_Phone)
+VALUES 
+(1, 'Christopher', 'Nolan', 'London', '+1234567890'),
+(2, 'Steven', 'Spielberg', 'Los Angeles', '+1987654321'),
+(3, 'Martin', 'Scorsese', 'New York', '+9123456789'),
+(4, 'Quentin', 'Tarantino', 'Navi Mumbai', '+9198765432'),
+(5, 'James', 'Cameron', 'Los Angeles', '+9178901234');
+
+INSERT INTO Movies (Mov_id, Mov_Title, Mov_year, Mov_Lang, Dir_id)
+VALUES 
+(101, 'Inception', 2010, 'English', 1),
+(102, 'Jurassic Park', 1993, 'English', 2),
+(103, 'The Departed', 2006, 'English', 3),
+(104, 'Pulp Fiction', 1994, 'English', 4),
+(105, 'Avatar', 2009, 'English', 5);
+
+ <h1>List all the movies released in the year 2023</h1>
+SELECT * FROM Movies
+WHERE Mov_year = 2023;
+
+ <h1>Find all the directors from ‘Navi Mumbai’</h1>
+SELECT * FROM Director
+WHERE Dir_city = 'Navi Mumbai';
+
+ <h1>Create a trigger to store the details of Directors with current date before delete operation on director table</h1>
+CREATE TABLE Deleted_Directors (
+    Dir_id int,
+    Dir_FName varchar(50),
+    Dir_LName varchar(50),
+    Dir_Phone varchar(15),
+    Date_deleted date
+);
+
+DELIMITER //
+CREATE TRIGGER before_director_delete
+BEFORE DELETE ON Director
+FOR EACH ROW
+BEGIN
+    INSERT INTO Deleted_Directors (Dir_id, Dir_FName, Dir_LName, Dir_Phone, Date_deleted)
+    VALUES (OLD.Dir_id, OLD.Dir_FName, OLD.Dir_LName, OLD.Dir_Phone, CURDATE());
+END //
+DELIMITER ;
+
+ <h1>Perform delete operation on director table and display the audit table</h1>
+DELETE FROM Director
+WHERE Dir_city = 'Navi Mumbai';
+
+SELECT * FROM Deleted_Directors;
+
+
+            </pre>
+        </div>
+        <div class="col-2">
+            <pre>
+                
+            </pre>
+        </div>
+
+    </div>
+    <hr>
+</body>
+
+</html>

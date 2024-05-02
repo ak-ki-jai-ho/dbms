@@ -1,0 +1,148 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         h1 {
+            color: rgb(49, 49, 49);
+            font-size: x-large;
+        }
+
+        pre {
+            margin-left: 20px;
+            font-size: large;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+        }
+        ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border:#979595;
+}
+
+li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #979595;
+}
+
+.active {
+  background-color: #9fa1a0;
+}
+
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a href="index.html">Exp1</a></li>
+        <li><a href="exp2.html">Exp2</a></li>
+        <li><a href="exp3.html">Exp3</a></li>
+        <li ><a class="active" href="exp4.html">Exp4</a></li>
+        <li><a href="exp5.html">Exp5</a></li>
+        <li><a href="exp6.html">Exp6</a></li>
+        <li><a href="exp7.html">Exp7</a></li>
+        <li ><a href="exp8.html">Exp8</a></li>
+        <li><a href="exp9.html">Exp9</a></li>
+        <li><a href="exp10.html">Exp10</a></li>
+        <li><a href="exp11.html">Exp11</a></li>
+        <li ><a href="exp12.html">Exp12</a></li>
+        <li><a href="exp13.html">Exp13</a></li>
+        
+      </ul>
+    <hr>
+    <div class=row>
+        <div class="col-1">
+            <pre>
+                 <h1>Create tables</h1>
+                CREATE TABLE Employee (
+                    SSN varchar(11) PRIMARY KEY,
+                    Name varchar(100),
+                    Address varchar(200),
+                    Sex varchar(10),
+                    Salary numeric(10, 2),
+                    SuperSSN varchar(11),
+                    DNo int
+                );
+                
+                CREATE TABLE Department (
+                    DNo int PRIMARY KEY,
+                    DName varchar(100),
+                    MgrSSN varchar(11),
+                    MgrStartDate date
+                );
+                
+                 <h1>Insert five tuples in each table</h1>
+                INSERT INTO Employee (SSN, Name, Address, Sex, Salary, SuperSSN, DNo)
+                VALUES 
+                ('111-11-1111', 'John Doe', '123 Main St, Anytown, USA', 'Male', 50000.00, '333-33-3333', 1),
+                ('222-22-2222', 'Jane Smith', '456 Oak St, Othertown, USA', 'Female', 60000.00, '333-33-3333', 2),
+                ('333-33-3333', 'Bob Johnson', '789 Elm St, Somewhere, USA', 'Male', 70000.00, NULL, 3),
+                ('444-44-4444', 'Alice Williams', '101 Pine St, Anycity, USA', 'Female', 55000.00, '333-33-3333', 1),
+                ('555-55-5555', 'David Brown', '202 Maple St, Anothercity, USA', 'Male', 65000.00, '333-33-3333', 3);
+                
+                INSERT INTO Department (DNo, DName, MgrSSN, MgrStartDate)
+                VALUES 
+                (1, 'Finance', '333-33-3333', '2020-01-01'),
+                (2, 'Marketing', '222-22-2222', '2020-01-01'),
+                (3, 'HR', '555-55-5555', '2020-01-01'),
+                (4, 'IT', '333-33-3333', '2020-01-01'),
+                (5, 'Operations', '444-44-4444', '2020-01-01');
+                
+                 <h1>List all employees whose department number is 3</h1>
+                SELECT * FROM Employee
+                WHERE DNo = 3;
+                
+                 <h1>Arrange all employees in descending order of their salary</h1>
+                SELECT * FROM Employee
+                ORDER BY Salary DESC;
+                
+                 <h1>Provide 2% increment to all employees of department 3</h1>
+                UPDATE Employee
+                SET Salary = Salary * 1.02
+                WHERE DNo = 3;
+                
+                 <h1>Display the name and address of all employees who work for the ‘HR' department</h1>
+                SELECT Name, Address FROM Employee
+                WHERE DNo = (SELECT DNo FROM Department WHERE DName = 'HR');
+                
+                 <h1>Perform natural join operation on the above relations</h1>
+                SELECT * FROM Employee NATURAL JOIN Department;
+                
+
+            </pre>
+        </div>
+        <div class="col-2">
+            <pre>
+
+                
+            </pre>
+        </div>
+
+    </div>
+    <hr>
+</body>
+
+</html>
