@@ -98,20 +98,20 @@ CREATE TABLE Author (
  <h1>Insert five tuples in each table</h1>
 INSERT INTO Book (ISBN, Bk_Title, Author_ID, Bk_Type, Price)
 VALUES 
-('ISBN001', 'Introduction to Algorithms', 101, 'Computer Science', 50.00),
-('ISBN002', 'Database Systems', 102, 'Computer Science', 60.00),
-('ISBN003', 'Physics for Scientists and Engineers', 103, 'Science', 40.00),
-('ISBN004', 'Chemistry: The Central Science', 104, 'Science', 45.00),
-('ISBN005', 'Mathematics for Machine Learning', 105, 'Mathematics', 55.00);
+('ISBN001', 'xxxx', 101, 'xxxx', 50.00),
+('ISBN002','xxxx', 102, 'xxxx', 60.00),
+('ISBN003', 'xxxx', 103, 'xxxx', 40.00),
+('ISBN004', 'xxxx', 104, 'xxxx', 45.00),
+('ISBN005', 'xxxx', 105, 'xxxx', 55.00);
 
 INSERT INTO Author (Author_ID, Author_fname, Author_lname, City, Contact_No)
 VALUES 
-(101, 'Thomas', 'Cormen', 'New York', '+1234567890'),
-(102, 'Abraham', 'Silberschatz', 'Boston', '+1987654321'),
-(103, 'Paul', 'Tipler', 'Thane', '+9123456789'),
-(104, 'Theodore', 'Brown', 'Mumbai', '+9198765432'),
-(105, 'Michael', 'Littman', 'Thane', '+9178901234');
-
+(101, 'xxx', 'xxx', 'xxx', '+1234567890'),
+(102, 'xxx', 'xxx', 'xxx', '+1234567890'),
+(103, 'xxx', 'xxx', 'xxx', '+1234567890'),
+(104, 'xxx', 'xxx', 'xxx', '+1234567890'),
+(105, 'xxx', 'xxx', 'xxx', '+1234567890');
+                
  <h1>Update the city of the author whose last name is “Patil”</h1>
 UPDATE Author
 SET City = 'Pune'
