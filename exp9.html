@@ -101,19 +101,19 @@ ADD COLUMN Salary numeric(10, 2);
  <h1>Insert five tuples in each table</h1>
 INSERT INTO Book (ISBN, Bk_Title, Author_ID, Bk_type, Price)
 VALUES 
-('ISBN001', 'Database Systems', 'AUTH_1', 'Technical', 50.00),
-('ISBN002', 'Introduction to Algorithms', 'AUTH_2', 'Technical', 60.00),
-('ISBN003', 'The Art of Computer Programming', 'AUTH_3', 'Technical', 70.00),
-('ISBN004', 'Data Structures and Algorithm Analysis', 'AUTH_4', 'Technical', 55.00),
-('ISBN005', 'Operating System Concepts', 'AUTH_5', 'Technical', 65.00);
+('xxxx', 'xxxx', 'xxx', 'xxx', 50.00),
+('xxxx', 'xxxx', 'xxx', 'xxx', 50.00),
+('xxxx', 'xxxx', 'xxx', 'xxx', 50.00),
+('xxxx', 'xxxx', 'xxx', 'xxx', 50.00),
+('xxxx', 'xxxx', 'xxx', 'xxx', 50.00);
 
 INSERT INTO Author (Author_ID, Author_fname, Author_lname, city, Contact_No, Salary)
 VALUES 
-('AUTH_1', 'Abraham', 'Silberschatz', 'New York', '+1234567890', 70000.00),
-('AUTH_2', 'Thomas', 'Cormen', 'Boston', '+1987654321', 75000.00),
-('AUTH_3', 'Donald', 'Knuth', 'Stanford', '+9123456789', 80000.00),
-('AUTH_4', 'Mark', 'Allen Weiss', 'California', '+9198765432', 72000.00),
-('AUTH_5', 'Andrew', 'Tanenbaum', 'Amsterdam', '+9178901234', 68000.00);
+('xxx', 'xxxx', 'xxxx', 'xxxx', '+xxx', 70000.00),
+('xxx', 'xxxx', 'xxxx', 'xxxx', '+xxx', 70000.00),
+('xxx', 'xxxx', 'xxxx', 'xxxx', '+xxx', 70000.00),
+('xxx', 'xxxx', 'xxxx', 'xxxx', '+xxx', 70000.00),
+('xxx', 'xxxx', 'xxxx', 'xxxx', '+xxx', 70000.00);
 
  <h1>Update the city of the author whose last name is “Korth”</h1>
 UPDATE Author
@@ -132,39 +132,18 @@ FROM Author
 WHERE Author_lname = 'Korth';
 
  <h1>Create a procedure to display the number of books, most expensive and least expensive as per type of book</h1>
-DELIMITER //
+DELIMITER // 
+CREATE PROCEDURE BookStatistics() 
+BEGIN 
+ SELECT Bk_type, COUNT(*) AS Num_of_books, 
+ MAX(Price) AS Most_expensive, 
+ MIN(Price) AS Least_expensive 
+ FROM Book 
+ GROUP BY Bk_type; 
+END// 
+DELIMITER ; 
+CALL BookStatistics();
 
-CREATE PROCEDURE BookStats()
-BEGIN
-    DECLARE book_count INT;
-    DECLARE most_expensive DECIMAL(8, 2);
-    DECLARE least_expensive DECIMAL(8, 2);
-    DECLARE bk_type VARCHAR(20);
-    
-    DECLARE cur CURSOR FOR
-        SELECT DISTINCT Bk_type FROM Book;
-    
-    OPEN cur;
-    
-    book_loop: LOOP
-        FETCH cur INTO bk_type;
-        IF bk_type IS NULL THEN
-            LEAVE book_loop;
-        END IF;
-        
-        SELECT COUNT(*), MAX(Price), MIN(Price) INTO book_count, most_expensive, least_expensive
-        FROM Book WHERE Bk_type = bk_type;
-        
-        SELECT CONCAT('Type:', bk_type, ', Count:', book_count, ', Most Expensive:', most_expensive, ', Least Expensive:', least_expensive);
-    END LOOP;
-    
-    CLOSE cur;
-END //
-
-DELIMITER ;
-
- <h1>Call the procedure to display book statistics</h1>
-CALL BookStats();
 
               
             </pre>
